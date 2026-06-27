@@ -1,0 +1,12 @@
+.env
+**/node_modules/
+**/__pycache__/
+*.pyc
+.idea/
+.vscode/
+dist/
+frontend/dist/
+backend/models_pickles/*.pkl
+backend/models_pickles/*.joblib.pkl
+database/*.sqlite3
+backend/models/fertilizer_model.pkl

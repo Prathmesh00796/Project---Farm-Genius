@@ -1,0 +1,168 @@
+{
+  "_accuracy_note_mr": "ही माहिती फक्त अंदाज; शेतावर घेण्यापूर्वी कृषी सेवा केंद्र किंवा तज्ज्ञांशी नक्की चर्चा करा.",
+  "_accuracy_note_en": "Rough guidance — cross-check with your local extension office before sprays and costly steps.",
+  "by_class": {
+    "cotton_bacterial_leaf_blight": {
+      "title_mr": "कापूस — जीवाणूजन्य पान काळे (बॅक्टेरियल लीफ ब्लाइट) सदृश लक्षणे",
+      "title_en": "Cotton — Bacterial leaf blight (type symptoms)",
+      "organic_mr": "जास्त दिसलेले रोगी फांद्या काढून नष्ट करा; सेंद्रिय कंपोस्ट व जैविक ट्रायकोडर्मा माती ट्रिटमेंट करा; फवार्नीची वेळ ढगाळ/उन्हाळ्यात टाळून ओल पानांवर फवारू नका.",
+      "organic_en": "Cut and destroy worst branches; use rich compost and biocontrol fungi (Trichoderma) in manure; avoid sprays that keep leaves wet for hours.",
+      "inorganic_mr": "कृषी सेवा केंद्राच्या सल्ल्यानुसार मान्यता प्राप्त तांब्याचे औषध फवारावे; नेहमी मास्क आणि सुरक्षित कपडे घाला; डोस पुस्तकाशी जुळवा.",
+      "inorganic_en": "Use approved copper oxychloride / copper mixtures exactly as label + KVK timing; rotate chemistries yearly where possible.",
+      "immediate_mr": "१) आत्ताच सर्वात खराब पाने कापून एकत्र करा आणि जाळा किंवा खोल खड्ड्यात दाबून द्या। २) ट्रॅक्टर-साधने स्वच्छ ठेवा व रोग टाळा। ३) जास्त आजार असलेल्या झाडांचे नमुने आणि फोटो घेऊन जवळच्या केव्हीकेला दाखवा। ४) पुढील २४ तासांत जास्त मोठ्या फवाश्या टाळा जेणेकरून रोग आणि औषध दोन्ही योग्य काम करतील।"
+    },
+    "cotton_leaf_curl_virus": {
+      "title_mr": "कापूस — पाने वेलची धरून घेणारे कोळीवामुळे येणारा विषाणू समस्या",
+      "title_en": "Cotton — Leaf curl disease (spread by whiteflies)",
+      "organic_mr": "पिवळ्या सापळे व मित्र कीटकांना मदत होईल असे उपाय डेमोप्रमाणे वापरून आयआयपीएम पाळावे; सर्वात खराब झाडे लवकर काढून टाकून रोग फैलाव कमी करा.",
+      "organic_en": "Use yellow traps + predator-friendly sprays per IPM table; uproot hotspots early to slow virus buildup.",
+      "inorganic_mr": "महाराष्ट्र आयआयपीएम पुस्तिकेनुसार इमिदाक्लोप्रिड/ सिस्टीमिक स्प्लिट डोज सल्लेशिवाय वापरू नका; पुन्हापुन्हा एकच औषध वापरणे टाळा.",
+      "inorganic_en": "Systemic insecticides only in approved windows against whiteflies; obey PHI and bee-safe evenings where indicated.",
+      "immediate_mr": "१) फक्त जास्त गंभीर आजारी झाडे कापून टाकून नष्ट करा। २) पांढऱ्या माशीसंख्येचे डायरीला नोंद करा आणि तात्काळ डेमोप्रमाणेनुसार औषध ठरवा। ३) पुढील पेरणीसाठी निरोगी प्रमाणित बियाणे वापरण्याची तयारी करा। ४) नवीन नवीन आणि जुन्या ट्रॅक्टरवर येणारे रोग पसरवू नका — यंत्रे धुवा।"
+    },
+    "cotton_healthy": {
+      "title_mr": "कापूस — पाने व फांद्या निरोगी दिसतात",
+      "title_en": "Cotton — Looks healthy",
+      "organic_mr": "सेंद्रिय कंपोस्ट, मुळास हवा व पाणी नियोजन ठेवा; हानिकारक कीड पहिल्या लहान लहान डागांवरूनच ओळखा आणि नोंद घ्या.",
+      "organic_en": "Keep mulch/compost rhythm; scout weekly for mites, jassids early.",
+      "inorganic_mr": "मृदा चाचणीनुसारच NPK डोज ठेवा; अर्थातच मार्गदर्शिकेशिवाय औषधे फवरू नका.",
+      "inorganic_en": "Fertilizer only by soil/card tests; sprays only after pest crosses ETL.",
+      "immediate_mr": "१) घड्याळ आणि पेरणीवर आणि बोंड टप्प्यावर फिरण्या वेळा लिहून ठेवा। २) पुढच्या फवाश्येची हवामान पुर्वानुमानाबरोबर दिनदर्शिका सांभाळावी।"
+    },
+    "sugarcane_red_rot": {
+      "title_mr": "ऊस — लाल सड त्यामुळे होणार्या रंद्र व दुर्वास यांसारखे लक्षण",
+      "title_en": "Sugarcane — Red rot suspected",
+      "organic_mr": "निरोगी खोड/सेट निवडा; जैविक ड्रेनेज आणि हवाबंदी सुटण्यासाठी ओळीची रूंदी सांभळा.",
+      "organic_en": "Select disease-free planting material and improve drainage trenches.",
+      "inorganic_mr": "प्रमाणित सेट डीप आणि फंगिसाइड फवाश्या फक्त स्थानिक / VSI घोषणेनुसारच करा.",
+      "inorganic_en": "Follow VSI dips + sprays only as officer schedules.",
+      "immediate_mr": "१) सड घास येणारे बुंद त्वरित काढून शेताबाहेर नष्ट करा। २) पाण्याची अडथळा टाळा आणि नाले स्वच्छ ठेवा। ३) पुढच्या खोड ठेवणीपूर्वी फक्त निरोगी सेट आणि घोषणेनुसार उपचार वापरून घ्या।"
+    },
+    "sugarcane_rust": {
+      "title_mr": "ऊस — पिवळट/जांभळ्या छिद्र डाग (Rust)",
+      "title_en": "Sugarcane — Rust",
+      "organic_mr": "दाट ओळ आणि अतिरिक्त पत्रसह पाणी आणि हवाबंद टाळा; जीवांक ट्राइकोडर्मा ड्रेसिंग डेमोप्रकारे ट्राइ करा.",
+      "organic_en": "Open canopy with trash layout and biocontrol dressings alongside officer demo.",
+      "inorganic_mr": "पहिल्याच लहान टप्प्यावर स्वीकृत सल्फर किंवा ट्रायझॉल मिश्र फवाश्या.",
+      "inorganic_en": "Sulfur or triazole early once pustules appear widely.",
+      "immediate_mr": "१) पिवळट डाग विस्तारली की ताबडतोब जवळच्या डेमोप्रमाणे फवाशी नियोजित करा। २) पात्र आणि वाळलेले रोगी पाने साफ करून उसात हवेचे व्यवस्थापन सुधारा।"
+    },
+    "sugarcane_healthy": {
+      "title_mr": "ऊस चांगल्या स्थितीत दिसतो",
+      "title_en": "Sugarcane — Healthy stand",
+      "organic_mr": "स्थानिक शिफारसीप्रमाणे सेंद्रिय खते व ट्रॅश व्यवस्थापन ठेवा; पाणी नियामक ड्रिप वा आळेवर नियोजित करा; तण वेळोवेळी काढा.",
+      "organic_en": "Maintain VSI nutrition chart + trash placement demo.",
+      "inorganic_mr": "फक्त मृदा परीक्षानुसारच NPK व सूक्ष्म खते टाका व अती नत्र टाळा.",
+      "inorganic_en": "Apply macronutrients only per grid tests.",
+      "immediate_mr": "१) ड्रिप किंवा आळेचे वेळापत्रक टिकवा। २) घनदाट ठिकाणी आणि पावसाळ्यात फवाश्या डायरीला जोडा। ३) पान फुगवट दिसेल तेव्हाच बुरशीसाठी डेमो पहावा।"
+    },
+    "rice_blast": {
+      "title_mr": "भात — डाग किंवा तणून कडकडीत काळे ठिकाण (धान Blast)",
+      "title_en": "Rice — Blast",
+      "organic_mr": "अतिरिक्त नत्र टाळा; सल्ल्यानुसार सिलिकॉन किंवा जैविक माती सुधारणा; पाणी अनावश्यक वेळा पानांवर उभे राहू देऊ नका.",
+      "organic_en": "Lower excess nitrogen; silica nutrition if soil tests advise.",
+      "inorganic_mr": "बूटिंगपूर्वी तालुका PAC प्रमाणे ट्रायझॉल / स्ट्रोबिल्युरिन फवाश्या — कोणते औषध हे केव्हीकेकडून निश्चित करा.",
+      "inorganic_en": "Triazole/azox combos at paniculation per PAC.",
+      "immediate_mr": "१) लक्षण दिसली की घड्याळाबरोबर केव्हीकेने स्प्रे व नत्र विभागणी ठरवा। २) पाने लवकर सुके येतील अशा प्रकारे अतिरिक्त पाण्याची पातळी हलवून पहा। ३) पुन्हा पेरणीवर ट्रेटेड बियाणेचा विचार करा।"
+    },
+    "rice_brown_spot": {
+      "title_mr": "भात — तपकिरी लहान लहान डाग (ब्राउन स्पॉट)",
+      "title_en": "Rice — Brown spot",
+      "organic_mr": "पाणी अनावश्यक दिवस भर अडकवू नका; सेंद्रिय पालाश वातावरण सुधारवा.",
+      "organic_en": "Avoid long stagnant flood; address K shortage with manure.",
+      "inorganic_mr": "लवकरच कार्बंडाझिम किंवा तांबे आधारित फवारणी — तालुका शिफारस.",
+      "inorganic_en": "Carbendazim/copper early window.",
+      "immediate_mr": "१) पाण्याचा निचरा सुधारा। २) नमुने घेऊन रोग पडताना अचूक औषध ठरवा। ३) पुढच्या पेरणीसाठी बियाणे उपचार पुन्हा लावा।"
+    },
+    "rice_healthy": {
+      "title_mr": "भात — पिक निरोगी दिसते",
+      "title_en": "Rice — Healthy",
+      "organic_mr": "कंपोस्ट आणि हरित खताने माती उत्साही ठेवा; विभाजित नत्र.",
+      "organic_en": "Split N; keep field-level water book.",
+      "inorganic_mr": "मृदा चाचणी आधारे बेसाल + टॉपड्रेस.",
+      "inorganic_en": "Basal/top dress from soil grid.",
+      "immediate_mr": "१) टक्कल आणि मातीपातळीवर कीड आणि तण नियंत्रित ठेवा।"
+    },
+    "maize_rust": {
+      "title_mr": "मका — पानांवर तपकिरी/जांभळ्या लहान पुडांचे डाग (रस्ट)",
+      "title_en": "Maize — Rust",
+      "organic_mr": "जाती निवडीत प्रतिकार शक्ती; शेतात तण आणि नैसर्गिक हवेचे व्यवस्थापन.",
+      "organic_en": "Resistant hybrids if available; remove volunteer maize nearby.",
+      "inorganic_mr": "लवकर सल्फर किंवा ट्रायझॉल फवारणी — तालुका डेमो.",
+      "inorganic_en": "Sulfur/triazole at first pustule wave.",
+      "immediate_mr": "१) आजूबाजूच्या ही मक्यावर लक्ष ठेवा। २) खोलवर हवा मोकळी करा। ३) स्प्रे कार्य हवामान पत्रकानुसार आधीच प्लॅन करा।"
+    },
+    "maize_gray_leaf_spot": {
+      "title_mr": "मका — लांबट गडद रेषा आणि पिवळट किनार असलेली पाने (ग्रे लीफ स्पॉट)",
+      "title_en": "Maize — Gray leaf spot",
+      "organic_mr": "ओळी जास्त रूंद ठेवा; पिकाचा कचरा शेतात न पिकवता दूर कापा.",
+      "organic_en": "Wider rows; manage stubble off-field.",
+      "inorganic_mr": "पहिल्या लहान लहान लक्षणांवर स्ट्रोब + ट्रायझॉल मिश्रणे.",
+      "inorganic_en": "Strob + triazole once threshold hit.",
+      "immediate_mr": "१) पानांवरचे ओलसरपणा कमी करा। २) शेजारच्या पिकावर लक्ष ठेवा। ३) तात्काळ केव्हीके शिफारस घ्या।"
+    },
+    "maize_healthy": {
+      "title_mr": "मका निरोगी दिसतो",
+      "title_en": "Maize — Healthy",
+      "organic_mr": "कंपोस्ट आणि माती जीवसूत्रे जपा; पालाश तुटवट टाळा.",
+      "organic_en": "Maintain K on lateritic zones.",
+      "inorganic_mr": "मृदा चाचणी आधारे मॅक्रो/सूक्ष्म खते.",
+      "inorganic_en": "Grid-based nutrition.",
+      "immediate_mr": "१) तण आणि पाणी नियोजन तपासा। २) तापमान वाढत असल्यास सिंचन वेळा जुळवा।"
+    },
+    "wheat_stripe_rust": {
+      "title_mr": "गहू — पानांवर पिवळट रेषा (पिवळा/पांढरा रस्ट)",
+      "title_en": "Wheat — Stripe rust",
+      "organic_mr": "नत्र अतिरेक टाळा; हवा मोकळी ठेवा; भाजीपाला / डाळ पिकांसोबत फेरपालट.",
+      "organic_en": "Avoid late big N doses; rotate legumes.",
+      "inorganic_mr": "MPKV किंवा जिल्हा घोषणेनुसार ट्रायझॉल/स्ट्रोब फवारणी.",
+      "inorganic_en": "Triazole/strob at university calendar.",
+      "immediate_mr": "१) आजूबाजूच्या शेतातील रस्ट पहा। २) लहान लहान पुडची नोंद करून तात्काळ स्प्रे ठरवा। ३) हवामान पत्रकानुसार बुध/गुरू सकाळी फवारणी प्लॅन करा।"
+    },
+    "wheat_septoria": {
+      "title_mr": "गहू — पानांवर तपकिरी ठिपके व भेगा (सेप्टोरिया)",
+      "title_en": "Wheat — Septoria leaf spot",
+      "organic_mr": "ओळी व हवा मोकळी; जाती मिश्रण; तण कमी.",
+      "organic_en": "Airflow + variety mix + weed control.",
+      "inorganic_mr": "लवकर SDHI + ट्रायझॉल मिश्रण — मार्गदर्शक प्रमाणे.",
+      "inorganic_en": "SDHI+triazole early lesions.",
+      "immediate_mr": "१) पानाच्या खालचा भाग सुका ठेवा। २) फवारणीपूर्वी पान सुके आहेत का पहा। ३) नमुना घेऊन तात्काळ उपचार ठरवा।"
+    },
+    "wheat_healthy": {
+      "title_mr": "गहू निरोगी दिसतो",
+      "title_en": "Wheat — Healthy",
+      "organic_mr": "कंपोस्ट + विभाजित नत्र व्यवस्थापन.",
+      "organic_en": "Balanced manure + split N.",
+      "inorganic_mr": "मृदा चाचणीनुसार बेसाल + टॉप.",
+      "inorganic_en": "Soil-test plan.",
+      "immediate_mr": "१) अचानक थंडी किंवा कोरड्यासाठी सिंचन व पाण्याचा निचारा योग्य वेळी ठेवा।"
+    },
+    "soybean_frog_eye_leaf_spot": {
+      "title_mr": "सोयाबीन — पानांवर काळा किनार असलेला पांढरट मधोमध डाग",
+      "title_en": "Soybean — Frog-eye leaf spot",
+      "organic_mr": "भात/ज्वारीबरोबर फेरपालट घ्या; ओळीत हवा मोकळी ठेवा; जास्त घनदाट पाने कमी करा.",
+      "organic_en": "Rotate cereals; prune density for airflow.",
+      "inorganic_mr": "फुलोऱ्यापूर्वी स्ट्रोब/ट्रायझॉल — घोषणा अनुसार.",
+      "inorganic_en": "Strob/triazole pre-canopy flowering.",
+      "immediate_mr": "१) दोन्ही बाजूंनी पाने तपासा। २) पहिल्या लक्षणांवरच स्प्रे ठरवा। ३) पेरण पुन्हा एकच ठिकाणी करू नका।"
+    },
+    "soybean_bacterial_blight": {
+      "title_mr": "सोयाबीन — पिवळट ओळी व पाण्याचे डाग (जीवाणूजन्य)",
+      "title_en": "Soybean — Bacterial blight",
+      "organic_mr": "प्रमाणित बियाणे; सकाळच्या कोरड्या वेळेत काम; यंत्रे स्वच्छ.",
+      "organic_en": "Certified seed; work when foliage is dry; sanitize tools.",
+      "inorganic_mr": "पहिल्या लक्षणांवर तांबे आधारित बॅक्टेरिसाइड — अधिकाऱ्याच्या सल्ल्याने.",
+      "inorganic_en": "Copper bactericides early window.",
+      "immediate_mr": "१) ओल्या पानांमधून दुसऱ्या ओळीत जाऊ नका। २) स्प्रेयर धुवा। ३) तात्काळ नमुने घेऊन मार्गदर्शन घ्या।"
+    },
+    "soybean_healthy": {
+      "title_mr": "सोयाबीन निरोगी दिसते",
+      "title_en": "Soybean — Healthy",
+      "organic_mr": "राइझोबियम गाठी तपासा; कंपोस्ट व माती जीवसूत्रे.",
+      "organic_en": "Check nodulation; organic matter routine.",
+      "inorganic_mr": "पालाश व सूक्ष्म खते मृदा चाचणी प्रमाणे.",
+      "inorganic_en": "K/micro from soil card.",
+      "immediate_mr": "१) पाणी व तण नियोजन कायम ठेवा। २) कीड व जीवाणू दोन्ही नियमित पहा।"
+    }
+  }
+}
