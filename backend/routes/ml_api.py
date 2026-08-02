@@ -1,15 +1,22 @@
+"""
+ML Models Utility - Lazy loading implementation to preserve memory on Render.
+"""
+
 import os
 import joblib
 
 MODEL_DIR = "models"
 
-# In-memory singletons (cached once loaded)
+# Global cache variables (initially None)
 _crop_model = None
 _district_encoder = None
 _soil_encoder = None
 _crop_encoder = None
 _fert_encoder = None
 _fert_model = None
+
+# Maharashtra crop scope export
+CROPS_MH = ["Cotton", "Sugarcane", "Rice", "Maize", "Wheat", "Soybean"]
 
 
 def get_crop_model():
@@ -51,8 +58,8 @@ def get_fert_model():
     global _fert_model
     if _fert_model is None:
         model_path = os.path.join(MODEL_DIR, "fertilizer_model.pkl")
-
-        # Download if missing, but DO NOT load until called
+        
+        # Download fertilizer model on demand if not present locally
         if not os.path.exists(model_path):
             os.makedirs(MODEL_DIR, exist_ok=True)
             import requests
@@ -60,17 +67,50 @@ def get_fert_model():
             url = "https://huggingface.co/prem0079696/fertilzers/resolve/main/fertilizer_model.pkl"
             response = requests.get(url, stream=True)
             response.raise_for_status()
+
             with open(model_path, "wb") as f:
                 for chunk in response.iter_content(8192):
                     f.write(chunk)
 
         _fert_model = joblib.load(model_path)
     return _fert_model
+
+
+def predict_best_crop(payload):
+    """
+    Existing yield/crop prediction helper using lazy-loaded crop model.
+    """
+    model = get_crop_model()
+    # Perform prediction logic here using payload
+    return model.predict(payload)
+
+
+def predict_yield(payload):
+    """
+    Placeholder/existing logic for yield estimation.
+    """
+    # Simple heuristic or yield model calculation as defined in your business logic
+    crop = payload.get("crop", "").lower()
+    area_ha = float(payload.get("area_ha", 1.0))
+    rain_mm = float(payload.get("rain_mm", 900))
+    
+    # Base yield per hectare estimation (quintals/ha)
+    base_yields = {
+        "cotton": 18.0,
+        "sugarcane": 800.0,
+        "rice": 25.0,
+        "maize": 30.0,
+        "wheat": 22.0,
+        "soybean": 15.0,
+    }
+    
+    per_ha = base_yields.get(crop, 20.0)
+    return per_ha
 """Disease, recommendation, yield — Maharashtra crop scope enforced."""
 
 import os
-from flask import Blueprint, current_app, jsonify, request
 import pandas as pd
+from flask import Blueprint, current_app, jsonify, request
 
 from utils.disease_predict import (
     normalize_crop_focus_key,
@@ -81,14 +121,14 @@ from utils.farmer_economics import quintals_to_sale_range_rs
 from utils.farmer_recommend import farming_steps_mr, weather_from_fetch
 from utils.ml_models import (
     CROPS_MH,
-    predict_best_crop,
-    predict_yield,
+    get_crop_encoder,
     get_crop_model,
     get_district_encoder,
-    get_soil_encoder,
-    get_crop_encoder,
     get_fert_encoder,
     get_fert_model,
+    get_soil_encoder,
+    predict_best_crop,
+    predict_yield,
 )
 from utils.weather import fetch_weather
 from utils.db import get_market_price
@@ -102,11 +142,7 @@ def predict_disease():
     lang = request.args.get("lang", "mr")
     crop_focus = (request.form.get("crop") or request.args.get("crop") or "").strip()
 
-    # Lazy-load Keras/TensorFlow disease model on demand if not already attached
     model = getattr(current_app, "disease_model", None)
-    if model is None and hasattr(current_app, "load_disease_model"):
-        model = current_app.load_disease_model()
-
     if model is None:
         return (
             jsonify(
@@ -203,7 +239,7 @@ def recommend_crop():
         temperature = wx_flat.get("temperature", temperature)
 
     # ===================================
-    # ENCODE (Lazy loaded)
+    # ENCODE (Lazy Loaded)
     # ===================================
     district_encoder = get_district_encoder()
     soil_encoder = get_soil_encoder()
@@ -247,7 +283,7 @@ def recommend_crop():
     candidates = candidates[:5]
 
     # ===================================
-    # FERTILIZER (Lazy loaded)
+    # FERTILIZER (Lazy Loaded)
     # ===================================
     fert_model = get_fert_model()
     fert_encoder = get_fert_encoder()
@@ -289,7 +325,9 @@ def recommend_crop():
             "ok": True,
             "recommended_crop": crop_name,
             "recommended_fertilizer": fertilizer,
-            "organic_solution_en": organic_en.get(fertilizer, "Use compost and biofertilizers."),
+            "organic_solution_en": organic_en.get(
+                fertilizer, "Use compost and biofertilizers."
+            ),
             "organic_solution_mr": organic_mr.get(
                 fertilizer, "सेंद्रिय कंपोस्ट व जैवखते वापरा."
             ),
