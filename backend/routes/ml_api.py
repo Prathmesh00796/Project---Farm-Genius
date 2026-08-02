@@ -76,7 +76,36 @@ def predict_disease():
 import joblib
 import pandas as pd
 crop_model = joblib.load("models/crop_model.pkl")
-fert_model = joblib.load("models/fertilizer_model.pkl")
+
+
+
+
+
+import os
+import requests
+import joblib
+
+MODEL_DIR = "models"
+MODEL_PATH = os.path.join(MODEL_DIR, "fertilizer_model.pkl")
+
+if not os.path.exists(MODEL_PATH):
+    os.makedirs(MODEL_DIR, exist_ok=True)
+
+    url = "https://huggingface.co/prem0079696/fertilzers/resolve/main/fertilizer_model.pkl"
+
+    response = requests.get(url, stream=True)
+    response.raise_for_status()
+
+    with open(MODEL_PATH, "wb") as f:
+        for chunk in response.iter_content(8192):
+            f.write(chunk)
+
+fert_model = joblib.load(MODEL_PATH)
+
+
+
+
+
 
 district_encoder = joblib.load(
     "models/district_encoder.pkl"
