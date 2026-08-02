@@ -1,5 +1,6 @@
 """
-ML Models Utility - Lazy loading implementation to preserve memory on Render.
+utils/ml_models.py
+ML Model utilities with lazy loading to preserve memory on constrained environments (Render 512MB RAM).
 """
 
 import os
@@ -7,7 +8,7 @@ import joblib
 
 MODEL_DIR = "models"
 
-# Global cache variables (initially None)
+# Global lazy cache variables
 _crop_model = None
 _district_encoder = None
 _soil_encoder = None
@@ -15,7 +16,7 @@ _crop_encoder = None
 _fert_encoder = None
 _fert_model = None
 
-# Maharashtra crop scope export
+# Scope export
 CROPS_MH = ["Cotton", "Sugarcane", "Rice", "Maize", "Wheat", "Soybean"]
 
 
@@ -58,8 +59,8 @@ def get_fert_model():
     global _fert_model
     if _fert_model is None:
         model_path = os.path.join(MODEL_DIR, "fertilizer_model.pkl")
-        
-        # Download fertilizer model on demand if not present locally
+
+        # Download dynamically if missing
         if not os.path.exists(model_path):
             os.makedirs(MODEL_DIR, exist_ok=True)
             import requests
@@ -77,24 +78,16 @@ def get_fert_model():
 
 
 def predict_best_crop(payload):
-    """
-    Existing yield/crop prediction helper using lazy-loaded crop model.
-    """
+    """Predict best crop using lazy-loaded model."""
     model = get_crop_model()
-    # Perform prediction logic here using payload
     return model.predict(payload)
 
 
 def predict_yield(payload):
-    """
-    Placeholder/existing logic for yield estimation.
-    """
-    # Simple heuristic or yield model calculation as defined in your business logic
-    crop = payload.get("crop", "").lower()
-    area_ha = float(payload.get("area_ha", 1.0))
-    rain_mm = float(payload.get("rain_mm", 900))
+    """Calculate estimated crop yield per hectare."""
+    crop = str(payload.get("crop", "")).strip().lower()
     
-    # Base yield per hectare estimation (quintals/ha)
+    # Average yield in quintals per hectare
     base_yields = {
         "cotton": 18.0,
         "sugarcane": 800.0,
@@ -104,14 +97,14 @@ def predict_yield(payload):
         "soybean": 15.0,
     }
     
-    per_ha = base_yields.get(crop, 20.0)
-    return per_ha
+    return base_yields.get(crop, 20.0)
 """Disease, recommendation, yield — Maharashtra crop scope enforced."""
 
 import os
 import pandas as pd
 from flask import Blueprint, current_app, jsonify, request
 
+from utils.db import get_market_price
 from utils.disease_predict import (
     normalize_crop_focus_key,
     predict_with_model,
@@ -131,7 +124,6 @@ from utils.ml_models import (
     predict_yield,
 )
 from utils.weather import fetch_weather
-from utils.db import get_market_price
 
 bp = Blueprint("ml_api", __name__)
 
@@ -239,7 +231,7 @@ def recommend_crop():
         temperature = wx_flat.get("temperature", temperature)
 
     # ===================================
-    # ENCODE (Lazy Loaded)
+    # ENCODE (Lazy Loaded via functions)
     # ===================================
     district_encoder = get_district_encoder()
     soil_encoder = get_soil_encoder()
@@ -283,7 +275,7 @@ def recommend_crop():
     candidates = candidates[:5]
 
     # ===================================
-    # FERTILIZER (Lazy Loaded)
+    # FERTILIZER (Lazy Loaded via functions)
     # ===================================
     fert_model = get_fert_model()
     fert_encoder = get_fert_encoder()
