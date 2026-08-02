@@ -1,103 +1,3 @@
-"""
-utils/ml_models.py
-ML Model utilities with lazy loading to preserve memory on constrained environments (Render 512MB RAM).
-"""
-
-import os
-import joblib
-
-MODEL_DIR = "models"
-
-# Global lazy cache variables
-_crop_model = None
-_district_encoder = None
-_soil_encoder = None
-_crop_encoder = None
-_fert_encoder = None
-_fert_model = None
-
-# Scope export
-CROPS_MH = ["Cotton", "Sugarcane", "Rice", "Maize", "Wheat", "Soybean"]
-
-
-def get_crop_model():
-    global _crop_model
-    if _crop_model is None:
-        _crop_model = joblib.load(os.path.join(MODEL_DIR, "crop_model.pkl"))
-    return _crop_model
-
-
-def get_district_encoder():
-    global _district_encoder
-    if _district_encoder is None:
-        _district_encoder = joblib.load(os.path.join(MODEL_DIR, "district_encoder.pkl"))
-    return _district_encoder
-
-
-def get_soil_encoder():
-    global _soil_encoder
-    if _soil_encoder is None:
-        _soil_encoder = joblib.load(os.path.join(MODEL_DIR, "soil_encoder.pkl"))
-    return _soil_encoder
-
-
-def get_crop_encoder():
-    global _crop_encoder
-    if _crop_encoder is None:
-        _crop_encoder = joblib.load(os.path.join(MODEL_DIR, "crop_encoder.pkl"))
-    return _crop_encoder
-
-
-def get_fert_encoder():
-    global _fert_encoder
-    if _fert_encoder is None:
-        _fert_encoder = joblib.load(os.path.join(MODEL_DIR, "fert_encoder.pkl"))
-    return _fert_encoder
-
-
-def get_fert_model():
-    global _fert_model
-    if _fert_model is None:
-        model_path = os.path.join(MODEL_DIR, "fertilizer_model.pkl")
-
-        # Download dynamically if missing
-        if not os.path.exists(model_path):
-            os.makedirs(MODEL_DIR, exist_ok=True)
-            import requests
-
-            url = "https://huggingface.co/prem0079696/fertilzers/resolve/main/fertilizer_model.pkl"
-            response = requests.get(url, stream=True)
-            response.raise_for_status()
-
-            with open(model_path, "wb") as f:
-                for chunk in response.iter_content(8192):
-                    f.write(chunk)
-
-        _fert_model = joblib.load(model_path)
-    return _fert_model
-
-
-def predict_best_crop(payload):
-    """Predict best crop using lazy-loaded model."""
-    model = get_crop_model()
-    return model.predict(payload)
-
-
-def predict_yield(payload):
-    """Calculate estimated crop yield per hectare."""
-    crop = str(payload.get("crop", "")).strip().lower()
-    
-    # Average yield in quintals per hectare
-    base_yields = {
-        "cotton": 18.0,
-        "sugarcane": 800.0,
-        "rice": 25.0,
-        "maize": 30.0,
-        "wheat": 22.0,
-        "soybean": 15.0,
-    }
-    
-    return base_yields.get(crop, 20.0)
 """Disease, recommendation, yield — Maharashtra crop scope enforced."""
 
 import os
@@ -130,7 +30,6 @@ bp = Blueprint("ml_api", __name__)
 
 @bp.post("/predict-disease")
 def predict_disease():
-    # Maharashtra farmers → Marathi default; pass ?lang=en for English summaries
     lang = request.args.get("lang", "mr")
     crop_focus = (request.form.get("crop") or request.args.get("crop") or "").strip()
 
@@ -213,16 +112,10 @@ def recommend_crop():
     except Exception:
         return jsonify({"ok": False, "error": "N,P,K,pH,moisture required"}), 400
 
-    # ===================================
-    # DEFAULT VALUES
-    # ===================================
     soil_color = "Black"
     rainfall = 900
     temperature = 28
 
-    # ===================================
-    # WEATHER
-    # ===================================
     wx_pack = fetch_weather(city or None, os.environ.get("OPENWEATHER_API_KEY"))
     wx_flat = weather_from_fetch(wx_pack)
 
@@ -230,9 +123,7 @@ def recommend_crop():
         rainfall = wx_flat.get("rainfall", 900)
         temperature = wx_flat.get("temperature", temperature)
 
-    # ===================================
-    # ENCODE (Lazy Loaded via functions)
-    # ===================================
+    # Lazy-loaded encoders and models
     district_encoder = get_district_encoder()
     soil_encoder = get_soil_encoder()
     crop_encoder = get_crop_encoder()
@@ -256,15 +147,9 @@ def recommend_crop():
         ]
     )
 
-    # ===================================
-    # CROP PREDICTION
-    # ===================================
     crop_pred = crop_model.predict(crop_features)[0]
     crop_name = crop_encoder.inverse_transform([crop_pred])[0]
 
-    # ===================================
-    # TOP CANDIDATES
-    # ===================================
     probs = crop_model.predict_proba(crop_features)[0]
     candidates = []
 
@@ -274,9 +159,6 @@ def recommend_crop():
     candidates.sort(key=lambda x: x["probability"], reverse=True)
     candidates = candidates[:5]
 
-    # ===================================
-    # FERTILIZER (Lazy Loaded via functions)
-    # ===================================
     fert_model = get_fert_model()
     fert_encoder = get_fert_encoder()
 
@@ -287,9 +169,6 @@ def recommend_crop():
     fert_pred = fert_model.predict(fert_features)[0]
     fertilizer = fert_encoder.inverse_transform([fert_pred])[0]
 
-    # ===================================
-    # ORGANIC SOLUTIONS
-    # ===================================
     organic_en = {
         "Urea": "Use vermicompost, cow dung compost and jeevamrut.",
         "DAP": "Use bone meal, phosphate rich compost and FYM.",
