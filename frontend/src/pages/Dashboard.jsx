@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Boxes, Droplets, Leaf, Store, TrendingUp, Wind } from "lucide-react";
+import { Boxes, Droplets, Leaf, Store, TrendingUp, Wind, Volume2, VolumeX } from "lucide-react";
 import { api } from "../api/client";
 import { useLang } from "../context/LangContext";
 
@@ -18,14 +18,14 @@ const CITIES = [
 
 function Card({ icon: Icon, title, subtitle, tint, href }) {
   const body = (
-    <div className={`flex flex-col rounded-3xl bg-white p-5 shadow-xl shadow-emerald-100/60 ring-1 ring-emerald-100 ${tint}`}>
-      <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">
-          <Icon size={24} strokeWidth={2} />
+    <div className={`flex flex-col rounded-3xl bg-white/95 backdrop-blur-md p-6 shadow-xl shadow-emerald-950/5 ring-1 ring-emerald-200/70 hover:ring-emerald-400 hover:shadow-2xl transition-all duration-300 ${tint}`}>
+      <div className="mb-2 flex items-center gap-3.5">
+        <span className="flex h-13 w-13 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-100 to-lime-100 text-emerald-800 shadow-xs ring-1 ring-emerald-200">
+          <Icon size={26} strokeWidth={2.2} />
         </span>
         <div className="text-left">
-          <div className="text-lg font-extrabold text-slate-900">{title}</div>
-          <div className="text-sm text-slate-600">{subtitle}</div>
+          <div className="text-lg font-black text-slate-900 tracking-tight">{title}</div>
+          <div className="text-xs font-medium text-emerald-800/80 mt-0.5">{subtitle}</div>
         </div>
       </div>
     </div>
@@ -39,6 +39,8 @@ export function Dashboard() {
   const [wx, setWx] = useState(null);
   const [wxErr, setWxErr] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const run = async () => {
@@ -67,14 +69,75 @@ export function Dashboard() {
 
   return (
     <div className="space-y-8">
-      <div className="overflow-hidden rounded-[2rem] bg-gradient-to-br from-emerald-700 via-emerald-500 to-teal-500 px-6 py-10 text-left text-white shadow-2xl shadow-emerald-300/60 sm:px-10">
-        <p className="text-xs font-bold uppercase tracking-[0.35em] text-emerald-100">{t.hero_badge}</p>
-        <h1 className="mt-3 text-balance text-3xl font-black leading-snug sm:text-4xl md:text-[2.85rem]">
-          {t.tagline}
-        </h1>
-        <p className="mt-5 max-w-3xl text-pretty text-sm leading-relaxed text-emerald-50/98 sm:text-base">
-          {t.hero_sub}
-        </p>
+      {/* Hero Section with Looping Video */}
+      <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800 p-6 sm:p-10 text-white shadow-2xl shadow-emerald-400/30">
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+          {/* Left Hero Content */}
+          <div className="space-y-5 text-left lg:col-span-7">
+            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/25 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-200 backdrop-blur-md ring-1 ring-emerald-300/30">
+              <span className="h-2 w-2 rounded-full bg-lime-400 animate-pulse"></span>
+              {t.hero_badge}
+            </div>
+
+            <h1 className="text-balance text-3xl font-black leading-tight sm:text-4xl md:text-[2.65rem]">
+              {t.tagline}
+            </h1>
+
+            <p className="max-w-2xl text-pretty text-sm leading-relaxed text-emerald-100/95 sm:text-base">
+              {t.hero_sub}
+            </p>
+
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Link
+                to="/disease"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-emerald-900 shadow-lg hover:bg-emerald-50 transition hover:scale-105"
+              >
+                <Leaf size={18} className="text-emerald-600" />
+                {t.home_leaf}
+              </Link>
+              <Link
+                to="/recommend"
+                className="inline-flex items-center gap-2 rounded-full bg-emerald-600/40 border border-emerald-300/40 px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-emerald-600/60 transition backdrop-blur-md"
+              >
+                <TrendingUp size={18} className="text-lime-300" />
+                {t.home_soil}
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Video Container */}
+          <div className="lg:col-span-5">
+            <div className="group relative overflow-hidden rounded-3xl border-2 border-emerald-400/40 bg-black/40 shadow-2xl backdrop-blur-xs aspect-video sm:aspect-[16/10] lg:aspect-square flex items-center justify-center">
+              <video
+                ref={videoRef}
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              >
+                <source src="/hero-video.mp4" type="video/mp4" />
+                <source src="/hero-video.webm" type="video/webm" />
+              </video>
+
+              {/* Video Badge */}
+              <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-[11px] font-semibold text-emerald-200 backdrop-blur-md border border-white/10">
+                <span className="h-1.5 w-1.5 rounded-full bg-lime-400 animate-ping"></span>
+                <span>🌾 Farm Genius Live</span>
+              </div>
+
+              {/* Mute/Unmute audio button */}
+              <button
+                type="button"
+                onClick={() => setIsMuted(!isMuted)}
+                className="absolute bottom-3 right-3 rounded-full bg-black/60 p-2 text-white/90 backdrop-blur-md transition hover:bg-black/80 hover:text-white cursor-pointer"
+                title={isMuted ? "आवाज चालू करा (Unmute)" : "आवाज बंद करा (Mute)"}
+              >
+                {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
@@ -109,7 +172,7 @@ export function Dashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-[1.08fr_0.92fr]">
-        <div className="rounded-3xl bg-white p-6 shadow-xl shadow-sky-100/80 ring-1 ring-sky-100">
+        <div className="rounded-3xl bg-white/95 backdrop-blur-md p-6 shadow-xl shadow-emerald-950/5 ring-1 ring-emerald-200/70">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
             <div className="flex items-center gap-2 text-slate-900">
               <Droplets className="text-sky-500" />
@@ -223,8 +286,8 @@ export function Dashboard() {
           ) : null}
         </div>
 
-        <div className="space-y-4 rounded-3xl bg-gradient-to-br from-lime-50 via-white to-amber-50 p-6 shadow-xl ring-1 ring-lime-100">
-          <div className="text-lg font-extrabold text-slate-900">{t.nav_dash}</div>
+        <div className="space-y-4 rounded-3xl bg-white/95 backdrop-blur-md p-6 shadow-xl shadow-emerald-950/5 ring-1 ring-emerald-200/70">
+          <div className="text-lg font-black text-slate-900 tracking-tight">{t.nav_dash}</div>
           <ul className="space-y-3 text-sm leading-relaxed text-slate-700">
             <li className="flex gap-2">
               <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-emerald-500" />

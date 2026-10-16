@@ -74,7 +74,7 @@ export function YieldPage() {
 
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 rounded-[2rem] bg-white p-8 shadow-2xl shadow-lime-100 ring-1 ring-lime-100">
+    <div className="mx-auto max-w-4xl space-y-6 rounded-[2.5rem] bg-white/95 backdrop-blur-md p-8 shadow-2xl shadow-emerald-950/10 ring-1 ring-emerald-200/80">
       <div className="flex items-center gap-3">
         <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-50 text-lime-700 shadow-inner ring-1 ring-lime-100">
           <Boxes size={28} />

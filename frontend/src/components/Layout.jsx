@@ -10,6 +10,8 @@ import {
   UserPlus,
 } from "lucide-react";
 import { useLang } from "../context/LangContext";
+import { ChatbotWidget } from "./ChatbotWidget";
+import { AgentTourCard } from "./AgentTourCard";
 
 function NavBtn({ children, icon: Icon }) {
   return (
@@ -39,11 +41,16 @@ export function Layout({ children }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-lime-50">
-      <header className="sticky top-0 z-50 border-b border-emerald-100 bg-white/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-lime-500 text-xl shadow-lg shadow-emerald-200">
+    <div className="relative min-h-screen bg-agro-pattern text-slate-800 overflow-x-hidden">
+      {/* Soft Agricultural Ambient Lighting */}
+      <div className="pointer-events-none fixed -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-gradient-to-br from-emerald-400/20 via-teal-300/10 to-transparent blur-[130px]" />
+      <div className="pointer-events-none fixed top-1/3 -right-40 h-[580px] w-[580px] rounded-full bg-gradient-to-bl from-amber-400/15 via-lime-400/12 to-transparent blur-[140px]" />
+      <div className="pointer-events-none fixed -bottom-40 left-1/3 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-emerald-500/15 via-lime-500/10 to-transparent blur-[130px]" />
+
+      <header className="sticky top-0 z-50 border-b border-emerald-200/60 bg-white/85 backdrop-blur-xl shadow-xs">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3.5">
+          <Link to="/" className="flex items-center gap-2.5">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 via-green-600 to-lime-600 text-xl shadow-lg shadow-emerald-500/25 ring-2 ring-white">
               🌾
             </div>
             <div className="text-left leading-tight">
@@ -106,9 +113,32 @@ export function Layout({ children }) {
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
-      <footer className="border-t border-emerald-100 bg-white/80 py-6 text-center text-xs leading-relaxed text-slate-500">
-        <span className="mx-auto block max-w-3xl">{t.footer_line}</span>
+      
+      {/* Rich Grounded Agricultural Footer */}
+      <footer className="relative mt-16 border-t border-emerald-900/10 bg-gradient-to-b from-emerald-900 to-emerald-950 text-emerald-100 py-10 shadow-2xl">
+        <div className="mx-auto max-w-6xl px-4 text-center">
+          <div className="flex items-center justify-center gap-2.5 mb-3">
+            <span className="text-2xl">🌾</span>
+            <span className="font-extrabold text-white text-lg tracking-wide">{t.brand}</span>
+            <span className="text-xs bg-emerald-800/80 text-emerald-200 px-3 py-0.5 rounded-full border border-emerald-700/60 font-semibold">
+              महाराष्ट्र कृषी मंच
+            </span>
+          </div>
+          <p className="mx-auto max-w-3xl text-xs leading-relaxed text-emerald-200/90 font-medium">
+            {t.footer_line}
+          </p>
+          <div className="mt-5 pt-4 border-t border-emerald-800/60 text-[11px] text-emerald-400/80 flex flex-wrap items-center justify-between gap-2">
+            <span>© Farm Genius • समृद्ध शेतकरी, प्रगत महाराष्ट्र</span>
+            <span className="flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-lime-400 animate-pulse"></span>
+              सहा प्रमुख पिकांचे (कापूस, ऊस, भात, मका, गहू, सोयाबीन) डिजिटल कृषी सहाय्य
+            </span>
+          </div>
+        </div>
       </footer>
+
+      <AgentTourCard />
+      <ChatbotWidget />
     </div>
   );
 }

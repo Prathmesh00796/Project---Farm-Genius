@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { LangProvider } from "./context/LangContext";
+import { AgentGuideProvider } from "./context/AgentGuideContext";
 import { Layout } from "./components/Layout";
 import { Dashboard } from "./pages/Dashboard";
 import { DiseasePage } from "./pages/Disease";
@@ -13,18 +14,20 @@ export default function App() {
   return (
     <LangProvider>
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/disease" element={<DiseasePage />} />
-            <Route path="/recommend" element={<RecommendPage />} />
-            <Route path="/yield" element={<YieldPage />} />
-            <Route path="/market" element={<MarketPage />} />
-            <Route path="/login" element={<AuthLogin />} />
-            <Route path="/register" element={<AuthRegister />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Layout>
+        <AgentGuideProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/disease" element={<DiseasePage />} />
+              <Route path="/recommend" element={<RecommendPage />} />
+              <Route path="/yield" element={<YieldPage />} />
+              <Route path="/market" element={<MarketPage />} />
+              <Route path="/login" element={<AuthLogin />} />
+              <Route path="/register" element={<AuthRegister />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Layout>
+        </AgentGuideProvider>
       </BrowserRouter>
     </LangProvider>
   );

@@ -92,7 +92,7 @@ export function DiseasePage() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr,1.05fr]">
-      <div className="space-y-4 rounded-[2rem] bg-white p-8 shadow-xl shadow-emerald-100 ring-1 ring-emerald-100">
+      <div className="space-y-4 rounded-[2rem] bg-white/95 backdrop-blur-md p-8 shadow-xl shadow-emerald-950/5 ring-1 ring-emerald-200/70">
         <h2 className="text-left text-2xl font-black text-slate-900">{t.nav_disease}</h2>
         <p className="text-left text-sm text-slate-600">{t.upload_hint}</p>
 
@@ -154,13 +154,13 @@ export function DiseasePage() {
 
       <div className="space-y-4">
         {!res ? (
-          <div className="rounded-[2rem] bg-slate-50 p-8 text-center text-sm text-slate-500 shadow-inner ring-1 ring-slate-100">
+          <div className="rounded-[2rem] bg-white/80 backdrop-blur-md p-8 text-center text-sm text-slate-600 shadow-sm ring-1 ring-emerald-200/60">
             {lang === "mr"
               ? "फोटो अपलोड केल्यावर येथे रोगाचे नाव आतील — जैविक, रासायनिक आणि तात्काळ पावले वेगळे दाखवू."
               : "After upload you will see the disease name plus organic vs chemical pathways and urgent steps."}
           </div>
         ) : (
-          <div className="space-y-4 rounded-[2rem] bg-white p-7 shadow-2xl shadow-emerald-200/60 ring-1 ring-emerald-100 sm:p-8">
+          <div className="space-y-4 rounded-[2rem] bg-white/95 backdrop-blur-md p-7 shadow-2xl shadow-emerald-950/10 ring-1 ring-emerald-200/80 sm:p-8">
             {accNote && (
               <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950">
                 {accNote}
