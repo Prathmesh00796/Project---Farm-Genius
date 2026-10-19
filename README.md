@@ -339,11 +339,6 @@ Contributions, feedback, and issue reports are warmly welcomed!
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License** — feel free to adapt and use it for academic, research, and non-commercial farmer welfare purposes.
-
----
 
 <div align="center">
   <b>Farm Genius — समृद्ध शेतकरी, प्रगत महाराष्ट्र 🌾</b>
